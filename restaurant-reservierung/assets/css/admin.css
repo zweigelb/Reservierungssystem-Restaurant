@@ -1,0 +1,156 @@
+/* Restaurant Reservierung – Admin */
+
+.rr-wrap { max-width: 1100px; }
+
+.rr-h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1a1a2e;
+}
+
+.rr-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+
+.rr-card h2 {
+    margin: 0 0 18px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a2e;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* Tabs */
+.rr-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0;
+}
+
+.rr-tab {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: -2px;
+    border: 2px solid transparent;
+    border-bottom: none;
+    transition: color .15s;
+}
+
+.rr-tab:hover { color: #1a1a2e; }
+
+.rr-tab.active {
+    background: #fff;
+    color: #1a1a2e;
+    font-weight: 600;
+    border-color: #e0e0e0;
+    border-bottom-color: #fff;
+}
+
+.rr-badge {
+    display: inline-block;
+    background: #ddd;
+    color: #555;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-left: 4px;
+}
+.rr-badge--warn { background: #fff3cd; color: #856404; }
+.rr-badge--ok   { background: #d1f2e3; color: #1a6e3e; }
+.rr-badge--err  { background: #fde8e8; color: #8b1a10; }
+
+/* Tabelle */
+.rr-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+.rr-table th {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+}
+
+.rr-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.rr-table tr:last-child td { border-bottom: none; }
+
+.rr-row--ausstehend { background: #fffef5; }
+.rr-row--bestaetigt { background: #f5fdf8; }
+.rr-row--abgelehnt  { background: #fdf5f5; opacity: .75; }
+
+.rr-table a { color: #1a1a2e; text-decoration: none; }
+.rr-table a:hover { text-decoration: underline; }
+
+/* Status-Badge */
+.rr-status {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.rr-status--ausstehend { background: #fff3cd; color: #856404; }
+.rr-status--bestaetigt { background: #d1f2e3; color: #1a6e3e; }
+.rr-status--abgelehnt  { background: #fde8e8; color: #8b1a10; }
+
+/* Buttons */
+.rr-btn {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: opacity .15s;
+    margin-right: 3px;
+    font-family: inherit;
+}
+.rr-btn:hover { opacity: .85; }
+.rr-btn--ok  { background: #27ae60; color: #fff; }
+.rr-btn--err { background: #c0392b; color: #fff; }
+.rr-btn--del { background: #ddd; color: #555; }
+
+/* Anmerkung Icon */
+.rr-note-icon {
+    cursor: help;
+    font-size: 14px;
+    margin-left: 4px;
+}
+
+.rr-leer {
+    color: #999;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+.rr-actions { white-space: nowrap; }

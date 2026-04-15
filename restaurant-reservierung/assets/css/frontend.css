@@ -1,0 +1,526 @@
+/* Restaurant Reservierung – Frontend CSS v3 */
+:root {
+    --rr-gold:        rgb(197, 171, 107);
+    --rr-gold-border: rgba(197, 171, 107, 0.6);
+    --rr-gold-bg:     rgba(197, 171, 107, 0.08);
+    --rr-dark:        #1a1a2e;
+}
+
+.rr-form-wrap { max-width: 680px; margin: 0 auto; font-family: inherit; }
+
+.rr-form-inner {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 36px 40px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.07);
+}
+
+.rr-form-title { font-size: 22px; font-weight: 700; margin: 0 0 6px; color: #1a1a2e; }
+.rr-form-sub   { color: #666; font-size: 14px; margin: 0 0 28px; line-height: 1.6; }
+
+/* ---- Schritte ---- */
+.rr-step { margin-bottom: 28px; }
+.rr-step-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 12px;
+}
+
+/* ---- Personenzahl ---- */
+.rr-personen-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.rr-pers-btn {
+    width: 40px; height: 40px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    background: #fafafa;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+}
+.rr-pers-btn:hover { border-color: #1a1a2e; background: #f0f0f5; color: #1a1a2e; }
+.rr-pers-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+
+.rr-personen-extra {
+    padding: 8px 10px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    background: #fafafa;
+}
+
+/* ---- Kalender ---- */
+.rr-step--calendar { border-top: 1px solid #f0f0f0; padding-top: 24px; }
+
+.rr-cal-loading {
+    text-align: center;
+    padding: 32px;
+    color: #999;
+    font-size: 14px;
+}
+
+.rr-cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.rr-cal-monat { font-size: 16px; color: #1a1a2e; }
+.rr-cal-monat strong { font-weight: 700; }
+
+.rr-cal-prev, .rr-cal-next {
+    background: none;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    width: 34px; height: 34px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    color: #555;
+    transition: all .15s;
+    display: flex; align-items: center; justify-content: center;
+    font-family: inherit;
+}
+.rr-cal-prev:hover:not([disabled]), .rr-cal-next:hover:not([disabled]) {
+    border-color: #1a1a2e; color: #1a1a2e; background: #f5f5f5;
+}
+.rr-cal-prev[disabled] { opacity: .3; cursor: not-allowed; }
+
+/* Kalender-Grid */
+.rr-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.rr-cal-th {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #aaa;
+    padding: 6px 0 10px;
+    letter-spacing: .4px;
+}
+
+.rr-cal-td {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #ccc;
+    transition: all .15s;
+    gap: 3px;
+}
+
+.rr-cal-day-num { line-height: 1; font-size: 14px; }
+
+/* Status-Varianten */
+.rr-cal-td--inaktiv   { color: #ccc; }
+.rr-cal-td--vergangen { color: #ddd; }
+.rr-cal-td--gesperrt  { color: #ccc; background: #fafafa; }
+.rr-cal-td--voll      { color: #bbb; background: #fafafa; }
+
+.rr-cal-td--frei {
+    color: var(--rr-dark);
+    background: var(--rr-gold-bg);
+    border: 1.5px solid var(--rr-gold-border);
+}
+.rr-cal-td--teilweise {
+    color: #1a1a2e;
+    background: #fff8ee;
+    border: 1.5px solid #ffd899;
+}
+
+.rr-cal-td--klickbar { cursor: pointer; }
+.rr-cal-td--klickbar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    z-index: 1;
+}
+.rr-cal-td--frei.rr-cal-td--klickbar:hover     { background: rgba(197,171,107,.18); border-color: rgb(197,171,107); }
+.rr-cal-td--teilweise.rr-cal-td--klickbar:hover { background: #fff0d0; border-color: #ffc040; }
+
+.rr-cal-td--heute .rr-cal-day-num {
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.rr-cal-td--selected {
+    background: #fff !important;
+    color: var(--rr-dark) !important;
+    border: 2px solid var(--rr-gold) !important;
+    box-shadow: 0 3px 10px rgba(197,171,107,.25) !important;
+    font-weight: 700 !important;
+}
+
+/* Status-Punkte unter Tageszahl */
+.rr-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    display: block;
+    flex-shrink: 0;
+}
+.rr-dot--frei      { background: var(--rr-gold); }
+.rr-dot--teilweise { background: #f5a623; }
+.rr-dot--voll      { background: #d9534f; }
+.rr-dot--gesperrt  { background: #ccc; }
+
+/* Legende */
+.rr-cal-legende {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.rr-l {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #666;
+}
+.rr-l::before {
+    content: '';
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    display: inline-block;
+}
+.rr-l--frei::before      { background: var(--rr-gold-bg); border: 1.5px solid var(--rr-gold-border); }
+.rr-l--teilweise::before { background: #fff8ee; border: 1.5px solid #ffd899; }
+.rr-l--voll::before      { background: #fafafa; border: 1.5px solid #eee; }
+.rr-l--gesperrt::before  { background: #fafafa; border: 1.5px solid #ddd; }
+
+/* ---- Zeitslots ---- */
+.rr-step--time { border-top: 1px solid #f0f0f0; padding-top: 24px; }
+
+.rr-selected-date {
+    font-weight: 700;
+    font-size: 15px;
+    color: #1a1a2e;
+    margin-bottom: 14px;
+}
+
+.rr-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rr-slots-loading { padding: 16px 0; color: #999; font-size: 14px; }
+.rr-slots-err     { color: #c0392b; font-size: 14px; padding: 8px 0; }
+
+.rr-slot-btn {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 10px 18px !important;
+    border: 1.5px solid #ddd !important;
+    border-radius: 7px !important;
+    background: #fafafa !important;
+    color: #222 !important;
+    cursor: pointer !important;
+    transition: all .15s !important;
+    font-family: inherit !important;
+    min-width: 90px !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+.rr-slot-btn:hover:not([disabled]) {
+    border-color: rgb(197,171,107) !important;
+    border-width: 2px !important;
+    background: rgba(197,171,107,.08) !important;
+    color: #1a1a2e !important;
+}
+.rr-slot-btn.active {
+    background: #fff !important;
+    border: 2px solid rgb(197,171,107) !important;
+    color: #1a1a2e !important;
+    box-shadow: 0 2px 10px rgba(197,171,107,.25) !important;
+}
+.rr-slot-btn--voll {
+    opacity: .4 !important;
+    cursor: not-allowed !important;
+}
+.rr-slot-time { font-size: 15px !important; font-weight: 700 !important; line-height: 1.2 !important; }
+.rr-slot-hint { display: block !important; font-size: 11px !important; color: rgb(197,171,107) !important; margin-top: 3px !important; font-weight: 600 !important; line-height: 1.2 !important; }
+.rr-slot-btn.active .rr-slot-hint { color: rgb(197,171,107) !important; }
+.rr-slot-btn--voll .rr-slot-hint  { color: #999 !important; }
+
+/* ---- Kontaktdaten ---- */
+.rr-step--contact { border-top: 1px solid #f0f0f0; padding-top: 24px; }
+
+.rr-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 20px;
+}
+.rr-field { display: flex; flex-direction: column; gap: 5px; }
+.rr-field--full { grid-column: 1 / -1; }
+
+.rr-field label { font-size: 13px; font-weight: 600; color: #444; }
+.rr-field label span { color: #c0392b; }
+
+.rr-field input,
+.rr-field select,
+.rr-field textarea {
+    padding: 10px 13px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #222;
+    background: #fafafa;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+.rr-field input:focus,
+.rr-field select:focus,
+.rr-field textarea:focus {
+    border-color: var(--rr-gold);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(197,171,107,.15);
+}
+.rr-field input.rr-error,
+.rr-field select.rr-error {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 3px rgba(192,57,43,.08);
+}
+
+/* Zusammenfassung */
+.rr-summary { margin: 18px 0 10px; }
+.rr-summary-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    background: #f5f8ff;
+    border: 1.5px solid #d0e4fa;
+    border-radius: 7px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+/* DSGVO */
+.rr-dsgvo { margin: 16px 0 20px; font-size: 13px; color: #555; }
+.rr-dsgvo label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; line-height: 1.5; }
+.rr-dsgvo input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; width: 16px; height: 16px; cursor: pointer; }
+.rr-dsgvo a { color: #1a1a2e; text-decoration: underline; }
+
+/* Submit */
+.rr-submit {
+    display: inline-block;
+    padding: 13px 32px;
+    background: var(--rr-dark);
+    color: #fff;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: .2px;
+    transition: all .2s;
+    font-family: inherit;
+}
+.rr-submit:hover    { background: #2d2d50; border-color: var(--rr-gold); }
+.rr-submit:disabled { background: #999; cursor: not-allowed; }
+
+/* Nachrichten */
+.rr-msg {
+    padding: 13px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+.rr-msg--success { background: #edfaf3; border: 1px solid #27ae60; color: #1a6e3e; }
+.rr-msg--error   { background: #fdf0ef; border: 1px solid #c0392b; color: #8b1a10; }
+
+/* Erfolg */
+.rr-success-view { text-align: center; padding: 48px 24px; }
+.rr-success-icon { font-size: 54px; margin-bottom: 16px; }
+.rr-success-view h3 { font-size: 22px; color: #1a1a2e; margin: 0 0 12px; }
+.rr-success-view p  { color: #666; font-size: 15px; line-height: 1.6; max-width: 420px; margin: 0 auto; }
+
+/* Spinner */
+.rr-spinner {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border: 2px solid #ddd;
+    border-top-color: #1a1a2e;
+    border-radius: 50%;
+    animation: rr-spin .7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+@keyframes rr-spin { to { transform: rotate(360deg); } }
+
+/* Responsive */
+@media (max-width: 580px) {
+    .rr-form-inner { padding: 22px 18px; }
+    .rr-grid       { grid-template-columns: 1fr; }
+    .rr-field--full { grid-column: 1; }
+    .rr-cal-td      { font-size: 12px; }
+    .rr-pers-btn    { width: 36px; height: 36px; font-size: 13px; }
+    .rr-slot-btn    { min-width: 76px; padding: 8px 12px; }
+}
+
+/* ---- Personen-Stepper ---- */
+.rr-stepper {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 340px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.rr-stepper-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 48px !important;
+    height: 52px !important;
+    min-width: 48px !important;
+    background: #f5f5f5 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-size: 22px !important;
+    font-weight: 300 !important;
+    color: #333 !important;
+    cursor: pointer !important;
+    transition: background .15s !important;
+    font-family: inherit !important;
+    flex-shrink: 0 !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+.rr-stepper-btn:hover:not([disabled]) { background: #e8e8e8 !important; }
+.rr-stepper-btn[disabled]             { color: #ccc !important; cursor: not-allowed !important; opacity: 1 !important; }
+.rr-stepper-minus                     { border-right: 1.5px solid #ddd !important; }
+.rr-stepper-plus                      { border-left:  1.5px solid #ddd !important; }
+
+.rr-stepper-display {
+    flex: 1 !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 10px 14px !important;
+    font-size: 15px !important;
+    color: #222 !important;
+}
+
+.rr-stepper-icon { font-size: 16px; }
+
+#rr-pers-zahl {
+    font-weight: 700;
+    font-size: 16px;
+    min-width: 14px;
+    text-align: center;
+}
+
+.rr-stepper-label {
+    font-size: 14px;
+    color: #444;
+}
+
+.rr-stepper-hint {
+    font-size: 12px;
+    color: var(--rr-gold);
+    margin-top: 7px;
+}
+
+/* ---- Heute-Sperre & Info-Box ---- */
+.rr-cal-td--heute {
+    cursor: pointer;
+}
+.rr-cal-td--heute .rr-cal-day-num {
+    font-weight: 800;
+}
+
+.rr-cal-info {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: #fff8e6;
+    border: 1.5px solid #f5c842;
+    border-radius: 7px;
+    font-size: 13px;
+    color: #5a4000;
+    line-height: 1.6;
+}
+.rr-cal-info a {
+    color: #1a1a2e;
+    font-weight: 700;
+    text-decoration: none;
+}
+.rr-cal-info a:hover { text-decoration: underline; }
+
+/* ---- Tooltip für gesperrte Tage ---- */
+.rr-tooltip {
+    position: fixed;
+    background: #1a1a2e;
+    color: #fff;
+    padding: 6px 11px;
+    border-radius: 5px;
+    font-size: 12px;
+    max-width: 200px;
+    z-index: 99999;
+    pointer-events: none;
+    line-height: 1.4;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+.rr-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1a1a2e;
+}
+
+/* ---- Status: heute (buchbarer Wochentag, aber online gesperrt) ---- */
+.rr-cal-td--heute {
+    background: #fff9ec;
+    border: 1.5px solid #f5c842;
+    color: #333;
+    cursor: pointer;
+}
+.rr-cal-td--heute:hover {
+    background: #fff3cc;
+}
