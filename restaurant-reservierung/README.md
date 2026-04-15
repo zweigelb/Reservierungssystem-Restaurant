@@ -1,5 +1,5 @@
 # Restaurant Reservierung – WordPress Plugin
-**Version:** 1.0.0  
+**Version:** 1.2.1  
 **Autor:** agentur zweigelb
 
 ---
@@ -17,7 +17,7 @@
 
 - **Buchungsformular** per Shortcode: `[restaurant_reservierung]`
 - **Wochentage** frei konfigurierbar (Standard: Mi–Sa)
-- **Zeitslots** 17:00–21:00 Uhr, 30-Minuten-Intervall (konfigurierbar)
+- **Zeitslots** 17:00–21:00 Uhr, 15-Minuten-Intervall (konfigurierbar)
 - **Kapazität** max. 20 Personen pro Slot (konfigurierbar)
 - **Manuelle Bestätigung**: Jede Buchung muss einzeln bestätigt werden
 - **E-Mails:**
@@ -48,7 +48,7 @@
 | Admin E-Mail | WP Admin-E-Mail |
 | Slots Start | 17:00 |
 | Slots Ende | 21:00 |
-| Intervall | 30 Minuten |
+| Intervall | 15 Minuten |
 | Max. Personen/Slot | 20 |
 | Wochentage | Mi, Do, Fr, Sa |
 
